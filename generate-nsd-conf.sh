@@ -11,11 +11,18 @@ for ttl in no low high max; do
 	       	owner="$TAG-$ttl-$amin-$dnssec-$nstype.$ZONE"
 		printf "zone:\n" >> "${NSD_CONF}"
 		printf "\tname: ${owner}\n"
-		printf "\tzonefile: ${ZONEDIR}/${owner}.signed" >> "${NSD_CONF}"
-		rm -f "${ZONEDIR}/K${owner}*"
-		dnssec-keygen -K "${ZONEDIR}" -a ECDSAP256SHA256 -f KSK -r /dev/urandom "${owner}"
-		dnssec-keygen -K "${ZONEDIR}" -a ECDSAP256SHA256 -r /dev/urandom "${owner}"
-		dnssec-signzone -S -K "${ZONEDIR}" -o "${owner}" "${ZONEDIR}/${owner}"
+		case "${dnssec}" in
+		    dnssec)
+			printf "\tzonefile: ${ZONEDIR}/${owner}.signed" >> "${NSD_CONF}"
+			rm -f "${ZONEDIR}/K${owner}*"
+			dnssec-keygen -K "${ZONEDIR}" -a ECDSAP256SHA256 -f KSK -r /dev/urandom "${owner}"
+			dnssec-keygen -K "${ZONEDIR}" -a ECDSAP256SHA256 -r /dev/urandom "${owner}"
+			dnssec-signzone -S -K "${ZONEDIR}" -o "${owner}" "${ZONEDIR}/${owner}"
+			;;
+		    nodnssec)
+			printf "\tzonefile: ${ZONEDIR}/${owner}" >> "${NSD_CONF}"
+			;;
+		esac
 	    done
 	done
     done
