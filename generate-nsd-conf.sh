@@ -14,10 +14,11 @@ for ttl in no low high max; do
 		case "${dnssec}" in
 		    dnssec)
 			printf "\tzonefile: ${ZONEDIR}/${owner}.signed" >> "${NSD_CONF}"
+			rm -f "${ZONEDIR}/${owner}.signed"
 			rm -f "${ZONEDIR}/K${owner}*"
 			dnssec-keygen -K "${ZONEDIR}" -a ECDSAP256SHA256 -f KSK -r /dev/urandom "${owner}"
 			dnssec-keygen -K "${ZONEDIR}" -a ECDSAP256SHA256 -r /dev/urandom "${owner}"
-			dnssec-signzone -S -K "${ZONEDIR}" -o "${owner}" "${ZONEDIR}/${owner}"
+			dnssec-signzone -S -N keep -K "${ZONEDIR}" -o "${owner}" "${ZONEDIR}/${owner}"
 			;;
 		    nodnssec)
 			printf "\tzonefile: ${ZONEDIR}/${owner}" >> "${NSD_CONF}"
