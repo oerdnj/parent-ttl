@@ -11,7 +11,7 @@ template:
   - id: nodnssec
     dnssec-signing: off
     serial-policy: "unixtime"
-    file: "${ZONEDIR}%s"
+    file: "${ZONEDIR}%s."
     zonefile-sync: 0
 
 template:
@@ -19,7 +19,7 @@ template:
     dnssec-signing: on
     dnssec-policy: dnssec
     serial-policy: "unixtime"
-    file: "${ZONEDIR}%s"
+    file: "${ZONEDIR}%s."
     zonefile-sync: 0
 
 zone:
