@@ -5,6 +5,7 @@ ZONE=udp53.cz.
 EZONE=ecdsa.cz.
 
 KNOT_CONF=/etc/knot/knot.conf.parent-ttl
+NSD_CONF=/etc/nsd/nsd.conf.parent-ttl
 
 ZONEDIR="/etc/parent-ttl/zones/"
 
