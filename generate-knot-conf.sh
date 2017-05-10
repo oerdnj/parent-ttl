@@ -30,7 +30,7 @@ for ttl in no low high max; do
 	for dnssec in dnssec nodnssec; do
 	    for nstype in in-bailiwick in-domain external; do
 	       	owner="$TAG-$ttl-$amin-$dnssec-$nstype.$ZONE"
-		printf "  - domain: $owner:\n" >> "${KNOT_CONF}"
+		printf "  - domain: $owner\n" >> "${KNOT_CONF}"
 		printf "    template: $dnssec\n" >> "${KNOT_CONF}"
 	    done
 	done
