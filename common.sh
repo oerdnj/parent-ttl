@@ -4,7 +4,9 @@
 ZONE=udp53.cz.
 EZONE=ecdsa.cz.
 
-ZONEDIR="$(pwd)/zones/"
+KNOT_CONF=/etc/knot/knot.conf.parent-ttl
+
+ZONEDIR="/etc/parent-ttl/zones/"
 
 HOSTMASTER="ondrej@sury.org"
 
