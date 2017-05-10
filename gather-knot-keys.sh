@@ -8,7 +8,7 @@ for ttl in no low high max; do
 	for dnssec in dnssec; do
 	    for nstype in in-bailiwick in-domain external; do
 	       	owner="$TAG-$ttl-$amin-$dnssec-$nstype.$ZONE"
-		keymgr zone key ds "${owner}" +active | grep -E "[[:space:]]*DS.*[[:space:]]2[[:space:]]"
+		keymgr zone key ds "${owner}" +active | grep -E "[[:space:]]*DS.*[[:space:]]2[[:space:]]" | sed -e "s,[[:space:]]DS[[:space:]], $TTL DS ,"
 	    done
 	done
     done
