@@ -9,7 +9,7 @@ NSD_CONF=/etc/nsd/nsd.conf.parent-ttl
 
 ZONEDIR="/etc/parent-ttl/zones/"
 
-HOSTMASTER="ondrej@sury.org"
+HOSTMASTER="ondrej.sury.org"
 
 TAG=parent-ttl
 
