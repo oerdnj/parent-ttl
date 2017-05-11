@@ -13,14 +13,14 @@ for ttl in no low high max; do
 		BIND_PID=$!
 		sleep 1
 	       	owner="$TAG-$ttl-$amin-$dnssec-$nstype.$ZONE"
-		kdig +noall +rec -t A "${owner}" -p "${BIND_PORT}" @::1
-		kdig +noall +rec -t AAAA "${owner}" -p "${BIND_PORT}" @::1
-		kdig +noall +rec -t MX "${owner}" -p "${BIND_PORT}" @::1
-		kdig +noall +rec -t A "www.${owner}" -p "${BIND_PORT}" @::1
-		kdig +noall +rec -t AAAA "www.${owner}" -p "${BIND_PORT}" @::1
-		TTL=$(kdig +noall +answer +authority +norec -t NS "${owner}" -p "${BIND_PORT}" @::1 | grep "${owner}" | tr -s " \t" " " | cut -f 2 -d " " | sort -u)
-		kdig +noall +rec -t NS "${owner}" -p "${BIND_PORT}" @::1
-		TTL2=$(kdig +noall +answer +authority +norec -t NS "${owner}" -p "${BIND_PORT}" @::1 | grep "${owner}" | tr -s " \t" " " | cut -f 2 -d " " | sort -u)
+		$DIG $DIG_PARAMS +noall +rec -t A "${owner}" -p "${BIND_PORT}" @::1
+		$DIG $DIG_PARAMS +noall +rec -t AAAA "${owner}" -p "${BIND_PORT}" @::1
+		$DIG $DIG_PARAMS +noall +rec -t MX "${owner}" -p "${BIND_PORT}" @::1
+		$DIG $DIG_PARAMS +noall +rec -t A "www.${owner}" -p "${BIND_PORT}" @::1
+		$DIG $DIG_PARAMS +noall +rec -t AAAA "www.${owner}" -p "${BIND_PORT}" @::1
+		TTL=$($DIG $DIG_PARAMS +noall +answer +authority +norec -t NS "${owner}" -p "${BIND_PORT}" @::1 | grep "${owner}" | tr -s " \t" " " | cut -f 2 -d " " | sort -u)
+		$DIG $DIG_PARAMS +noall +rec -t NS "${owner}" -p "${BIND_PORT}" @::1
+		TTL2=$($DIG $DIG_PARAMS +noall +answer +authority +norec -t NS "${owner}" -p "${BIND_PORT}" @::1 | grep "${owner}" | tr -s " \t" " " | cut -f 2 -d " " | sort -u)
 		kill -TERM $BIND_PID
 		printf "%s:%s:%s\n" "${owner}" "${TTL}" "${TTL2}"
 	    done

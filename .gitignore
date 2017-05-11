@@ -13,4 +13,4 @@ config
 /pdns_recursor.pid
 /tty
 /unbound-*
-										
+/logs/

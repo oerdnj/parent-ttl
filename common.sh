@@ -4,6 +4,9 @@
 ZONE=udp53.cz.
 EZONE=ecdsa.cz.
 
+DIG="kdig"
+DIG_PARAMS="+retry=1 +time=60"
+
 KNOT_CONF=/etc/knot/knot.conf.parent-ttl
 NSD_CONF=/etc/nsd/nsd.conf.parent-ttl
 
@@ -13,7 +16,11 @@ BIND_PORT=53002
 PDNS_RECURSOR_PORT=53003
 
 ZONEDIR="/etc/parent-ttl/zones/"
-LOGDIR=logs/
+LOGDIR=$(realpath logs/)
+TMPDIR=$(realpath tmp/)
+
+mkdir -p "${LOGDIR}"
+mkdir -p "${TMPDIR}"
 
 HOSTMASTER="ondrej.sury.org"
 
