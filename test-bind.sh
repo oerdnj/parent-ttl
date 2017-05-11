@@ -22,7 +22,7 @@ for ttl in no low high max; do
 		$DIG $DIG_PARAMS +noall +rec -t NS "${owner}" -p "${BIND_PORT}" @::1
 		TTL2=$($DIG $DIG_PARAMS +noall +answer +authority +norec -t NS "${owner}" -p "${BIND_PORT}" @::1 | grep "${owner}" | tr -s " \t" " " | cut -f 2 -d " " | sort -u)
 		kill -TERM $BIND_PID
-		printf "%s:%s:%s\n" "${owner}" "${TTL}" "${TTL2}"
+		printf "%s:%s:%s:%s\n" "bind" "${owner}" "${TTL}" "${TTL2}"
 	    done
 	done
     done
