@@ -7,7 +7,13 @@ EZONE=ecdsa.cz.
 KNOT_CONF=/etc/knot/knot.conf.parent-ttl
 NSD_CONF=/etc/nsd/nsd.conf.parent-ttl
 
+KRESD_PORT=53000
+UNBOUND_PORT=53001
+BIND_PORT=53002
+PDNS_RECURSOR_PORT=53003
+
 ZONEDIR="/etc/parent-ttl/zones/"
+LOGDIR=logs/
 
 HOSTMASTER="ondrej.sury.org"
 
@@ -37,3 +43,5 @@ NS2_NOMIN_A=$NS1_NOMIN_A
 NS2_NOMIN_AAAA=$NS1_NOMIN_AAAA
 
 SERIAL=$(date +%s)
+
+mkdir -p "${LOGDIR}"

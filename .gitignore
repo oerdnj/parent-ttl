@@ -2,3 +2,15 @@
 *~
 config
 *.mdb
+/logs/*.cache
+/logs/*.out
+/logs/*.err
+# the individual servers
+/bind-*
+/knot-resolver/
+/knot-resolver-*
+/pdns-recursor-*
+/pdns_recursor.pid
+/tty
+/unbound-*
+										
