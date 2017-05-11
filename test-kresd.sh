@@ -25,6 +25,8 @@ for ttl in no low high max; do
 		    if [ -n "${TTL}" ] && [ -n "${TTL2}" ]; then
 			printf "%s:%s:%s\n" "${owner}" "${TTL}" "${TTL2}"
 			break
+		    else
+			printf "." >&2
 		    fi
 		done
 	    done
