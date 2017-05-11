@@ -19,7 +19,7 @@ for ttl in no low high max; do
 		kdig +noall +rec -t NS "${owner}" -p "${UNBOUND_PORT}" @::1
 		TTL2=$(kdig +noall +answer +authority +norec -t NS "${owner}" -p "${UNBOUND_PORT}" @::1 | grep "${owner}" | tr -s " \t" " " | cut -f 2 -d " " | sort -u)
 		kill -TERM $UNBOUND_PID
-		printf "%s:%s\n" "${owner}" "${TTL}"
+		printf "%s:%s:%s\n" "${owner}" "${TTL}" "${TTL2}"
 	    done
 	done
     done

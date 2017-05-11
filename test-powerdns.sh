@@ -7,7 +7,7 @@ for ttl in no low high max; do
 	for dnssec in dnssec nodnssec; do
 	    for nstype in in-bailiwick in-domain external; do
 	       	owner="$TAG-$ttl-$amin-$dnssec-$nstype.$ZONE"
-		pdns_recursor --minimum-ttl-override=30 --dnssec=validate --local-address=::1 --local-port=${PDNS_RECURSOR_PORT} --socket-dir=. --max-cache-ttl="${MAX_TTL}" >logs/pdns_recursor-${owner}out 2>logs/pdns_recursor-${owner}err&
+		pdns_recursor --minimum-ttl-override=30 --dnssec=validate --local-address=::1 --local-port=${PDNS_RECURSOR_PORT} --socket-dir=. --packetcache-ttl=0 --max-cache-ttl="${MAX_TTL}" >logs/pdns_recursor-${owner}out 2>logs/pdns_recursor-${owner}err&
 		PDNS_RECURSOR_PID=$!
 		sleep 1
 		kdig +noall +rec -t A "${owner}" -p "${PDNS_RECURSOR_PORT}" @::1
